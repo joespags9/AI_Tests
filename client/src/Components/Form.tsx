@@ -186,16 +186,3 @@ const Form = () => {
 }
 
 export default Form
-
-/*
-        {sents.map((val) => {
-            for (var i of val?.similarities) {
-                var y = i?.Text
-                addSimWords([y])
-                console.log(y)
-                if (simWords.length > 0 ){
-                    setOpen(true)
-                }
-            }
-        })}
-        */
