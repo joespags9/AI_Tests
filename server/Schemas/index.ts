@@ -79,14 +79,14 @@ const RootQuery = new GraphQLObjectType({
                         someOtherArray = someArray.filter(distinct)
                     }
                 }
-
+                
                 // Add texts with no votes to main array
 
                 for (var k of someOtherArray){
                     const noVoteRants = await Sentence.find({"text":k});
                     basicRantArray.push(noVoteRants[0])
                 }
-
+                
                 // Add ids that received some votes to an array 
 
                 for (let i=0; i < rants.length; i++){
@@ -95,7 +95,7 @@ const RootQuery = new GraphQLObjectType({
                         newRantArray.push(rants2[0])
                     }
                 }
-
+                
                 // Add texts that received some votes to an array 
 
                 for (let i=0; i < rants0.length; i++){
@@ -104,7 +104,7 @@ const RootQuery = new GraphQLObjectType({
                         newRantArray2.push(rants4[0].text)
                     }
                 }
-
+                
                 // Add texts containing no similar elements to main array, or else create an array of similar sentences and an array of of the total objects 
 
                 for (let i=0; i < rants3.length; i++){
@@ -115,7 +115,7 @@ const RootQuery = new GraphQLObjectType({
                         anotherRantArray.push(rants3[i])
                     }
                 }
-
+            
                 // Sort each list of similar sentences to reflect the ordering of the list of sentences that received rankings
 
                 for (var d of otherRantArray){
@@ -131,7 +131,7 @@ const RootQuery = new GraphQLObjectType({
                 }
 
                 // Add fist element of each array to another array
-
+                
                 for (var g of filteredList){
                     if (g.length > 0){
                         whatIsThisArray.push(g[0])
@@ -139,11 +139,11 @@ const RootQuery = new GraphQLObjectType({
                 }
 
                 // Remove duplicates
-
+                
                 const finalFilteredList = whatIsThisArray.filter(distinct)
 
                 // Remove sentences that get supplanted later by other sentences 
-
+                
                 for (let i = 0; i < listsWithoutEmpties.length; i++){
                     for(let j = 0; j < finalFilteredList.length; j++){
                         if (listsWithoutEmpties[i].includes(finalFilteredList[j]) === true && finalFilteredList[j] !== listsWithoutEmpties[i][0]){
@@ -156,25 +156,28 @@ const RootQuery = new GraphQLObjectType({
                 }
 
                 // Add final list of sentences to an array                
-
+                
                 if (finalFilteredList3.length !== 0) {
                     for (let i=0; i < finalFilteredList3[0].length; i++){
                         const rants5 = await Sentence.find({"text":finalFilteredList3[0][i]});
                         finalRantArray.push(rants5[0])
                     }
-                } else {
+                } else if (finalFilteredList4.length !== 0) {
                     for (let i=0; i < finalFilteredList4[0].length; i++){
                         const rants6 = await Sentence.find({"text":finalFilteredList4[0][i]});
                         finalRantArray.push(rants6[0])
                     }
                 }
-
+  
                 // Combine all sentences
-
+                
                 for (let i=0; i < finalRantArray.length; i++){
                     basicRantArray.push(finalRantArray[i])
                 }
 
+                //console.log(finalFilteredList3)
+                //console.log(finalFilteredList4)
+                //console.log(basicRantArray)
                 return basicRantArray
             }
         }

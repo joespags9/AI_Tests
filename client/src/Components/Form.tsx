@@ -31,14 +31,15 @@ const Form = () => {
     let finalSentsArray: any[] = []
     let lastSentsArray: any[] = []
 
-    const addSentences = (text:String, event:any) => {
+    const addSentences = async (text:String, event:any) => {
         //console.log("text:", text)
         event.preventDefault();
-        addSentence({
+        await addSentence({
             variables:{
                 text: text
             }
         });
+
         addList([...list,text]);
 
         if (error) {
@@ -149,7 +150,7 @@ const Form = () => {
                 />
                 <Button onClick={(e) => addSentences(text,e)} variant="outlined"> Add your rant </Button>
                 {loading && <span>Checking for Similar Sentences...</span>}
-                <Dialog open={open} onClose={handleClose} hideBackdrop = {true}>
+                <Dialog open={open} hideBackdrop = {true}>
                     <DialogTitle>Is your sentence similar to any of these?</DialogTitle>
                     <DialogContent sx = {{width:"200px"}}>
                         {data?.sentenceSimilarities?.listSents.map((b:any) =>
