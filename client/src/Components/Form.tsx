@@ -31,10 +31,10 @@ const Form = () => {
     let finalSentsArray: any[] = []
     let lastSentsArray: any[] = []
 
-    const addSentences = async (text:String, event:any) => {
+    const addSentences = (text:String, event:any) => {
         //console.log("text:", text)
         event.preventDefault();
-        await addSentence({
+        addSentence({
             variables:{
                 text: text
             }

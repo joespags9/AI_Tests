@@ -174,10 +174,7 @@ const RootQuery = new GraphQLObjectType({
                 for (let i=0; i < finalRantArray.length; i++){
                     basicRantArray.push(finalRantArray[i])
                 }
-
-                //console.log(finalFilteredList3)
-                //console.log(finalFilteredList4)
-                //console.log(basicRantArray)
+                
                 return basicRantArray
             }
         }
