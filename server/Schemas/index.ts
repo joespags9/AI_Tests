@@ -261,7 +261,7 @@ const Mutation = new GraphQLObjectType({
                     return self.indexOf(value) == index;
                 }
 
-                const openai = new OpenAI('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');
+                const openai = new OpenAI('<api_key>');
                 const sentenceA = param.text;
                 const initialList = sentsArray.filter(distinct);
                 //const totalList = initialList.push(sentenceA);
